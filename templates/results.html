@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculation Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            height: 100vh; /* Full viewport height */
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .tables {
+            flex: 1; /* Take remaining space */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding-right: 20px; /* Space between tables and image */
+        }
+        .image-container {
+            flex: 0 0 30%; /* 20% width */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .image-container img {
+            width: 70%; /* Make image smaller */
+            height: auto;
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        h2 {
+            color: #007BFF;
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #dddddd;
+            text-align: left;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+            position: sticky;
+            top: 0; /* Keep headers visible during scroll */
+            z-index: 1;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .back-button {
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        .back-button a {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .back-button a:hover {
+            background-color: #218838;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #888888;
+            font-size: 12px;
+            width: 100%;
+        }
+        /* Responsive Design for Smaller Screens */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            .tables {
+                padding-right: 0;
+                margin-bottom: 20px;
+                height: 60vh;
+            }
+            .image-container {
+                flex: 0 0 40%; /* Increase image size on smaller screens */
+                height: 40vh;
+            }
+            .image-container img {
+                width: 60%; /* Adjust image size accordingly */
+            }
+        }
+        @media (max-width: 768px) {
+            .tables {
+                height: 50vh;
+            }
+            .image-container {
+                flex: 0 0 50%;
+                height: 50vh;
+            }
+            .image-container img {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tables Section -->
+        <div class="tables">
+            <h1>Calculation Results</h1>
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% elif results %}
+                <!-- Normal Calculations Table -->
+                <h2>Normal Calculations</h2>
+                <table>
+                    <tr>
+                        <th>Step</th>
+                        <th>Description</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Calculated Mb</td>
+                        <td>{{ results.Mb }} kg</td>
+                    </tr>
+                    <tr>
+                        <td>2.1</td>
+                        <td>Mode of Density (rho_mode)</td>
+                        <td>{{ results.rho_mode }} kg/m³</td>
+                    </tr>
+                    <tr>
+                        <td>2.2</td>
+                        <td>Maximum Wind Speed (v_max)</td>
+                        <td>{{ results.v_max }} m/s</td>
+                    </tr>
+                    <tr>
+                        <td>2.3</td>
+                        <td>Adjusted Wind Speed (v_adjusted)</td>
+                        <td>{{ results.v_adjusted }} m/s</td>
+                    </tr>
+                    <tr>
+                        <td>2.4</td>
+                        <td>Swept Area (A)</td>
+                        <td>{{ results.A }} m²</td>
+                    </tr>
+                    <tr>
+                        <td>2.5</td>
+                        <td>Diameter (D)</td>
+                        <td>{{ results.D }} m</td>
+                    </tr>
+                    <tr>
+                        <td>2.6</td>
+                        <td>Radius to Center of Gravity (Rcog)</td>
+                        <td>{{ results.Rcog }} m</td>
+                    </tr>
+                    <tr>
+                        <td>3.1</td>
+                        <td>Tip Speed Ratio (TSR)</td>
+                        <td>{{ results.TSR }}</td>
+                    </tr>
+                    <tr>
+                        <td>3.2</td>
+                        <td>Rotor Radius (R)</td>
+                        <td>{{ results.R }} m</td>
+                    </tr>
+                    <tr>
+                        <td>3.3</td>
+                        <td>Angular Speed (Wn)</td>
+                        <td>{{ results.Wn }} rad/s</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Calculated Force (fzB)</td>
+                        <td>{{ results.fzB }} N</td>
+                    </tr>
+                    <tr>
+                        <td>5.1</td>
+                        <td>Bending Moment Delta MxB</td>
+                        <td>{{ results.Delta_MxB }} Nm</td>
+                    </tr>
+                    <tr>
+                        <td>5.2</td>
+                        <td>Bending Moment Delta MyB</td>
+                        <td>{{ results.Delta_MyB }} Nm</td>
+                    </tr>
+                </table>
+
+                <!-- Load Case E Calculations Table -->
+                <h2>Load Case E: Maximum Rotational Speed Calculations</h2>
+                <table>
+                    <tr>
+                        <th>Step</th>
+                        <th>Description</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Calculated nmax</td>
+                        <td>{{ results.nmax }} RPM</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Calculated ω_n,max</td>
+                        <td>{{ results.omega_n_max }} rad/s</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Calculated fzB_max</td>
+                        <td>{{ results.fzB_max }} N</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Calculated mr (Rotor Mass)</td>
+                        <td>{{ results.mr }} kg</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Calculated Lrb (Distance to First Bearing)</td>
+                        <td>{{ results.Lrb }} m</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Calculated er (Eccentricity)</td>
+                        <td>{{ results.er }} m</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Calculated Shaft Bending Moment (Msha)</td>
+                        <td>{{ results.Msha }} Nm</td>
+                    </tr>
+                </table>
+            {% endif %}
+        </div>
+
+        <!-- Image Section -->
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='wind.jpg') }}" alt="Wind Turbine">
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    {% if not error %}
+        <div class="back-button">
+            <a href="/">&#8592; Back to Calculator</a>
+        </div>
+    {% endif %}
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Wind Turbine Calculations</p>
+    </div>
+</body>
+</html>
