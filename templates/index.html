@@ -67,13 +67,28 @@
 <body>
     <div class="container">
         <h1>Wind Turbine Calculation</h1>
-        <form action="/calculate_fzb" method="post" enctype="multipart/form-data">
+        <!-- <form action="/calculate_fzb" method="post" enctype="multipart/form-data">
             <label for="power">Power Required (MW):</label>
             <input type="number" id="power" name="power" step="0.01" required>
 
             <label for="file">Upload CSV File:</label>
             <input type="file" id="file" name="file" accept=".csv" required>
 
+            <button type="submit">Calculate</button>
+        </form> -->
+        <form action="/calculate_fzb" method="post" enctype="multipart/form-data">
+            <label for="power">Power Required (MW):</label>
+            <input type="number" id="power" name="power" step="0.01" required>
+        
+            <label for="blades">Number of Blades (B):</label>
+            <input type="number" id="blades" name="blades" step="1" value="3" required>
+        
+            <label for="cp">Power Coefficient (Cp):</label>
+            <input type="number" id="cp" name="cp" step="0.01" value="0.4" required>
+        
+            <label for="file">Upload CSV File:</label>
+            <input type="file" id="file" name="file" accept=".csv" required>
+        
             <button type="submit">Calculate</button>
         </form>
         <div class="footer">

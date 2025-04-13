@@ -251,6 +251,24 @@
                         <td>{{ results.Msha }} Nm</td>
                     </tr>
                 </table>
+                <h2>Load Case H: Extreme Wind Loading</h2>
+<table>
+    <tr><th>Step</th><th>Description</th><th>Value</th></tr>
+    <tr><td>1</td><td>50-year Extreme Wind Speed (Ve50)</td><td>{{ results.Ve50 }} m/s</td></tr>
+    <tr><td>2</td><td>Projected Blade Area (Aproj_B)</td><td>{{ results.Aproj_B }} m²</td></tr>
+    <tr><td>3</td><td>Lambda at Ve50 (λe50)</td><td>{{ results.lambda_e50 }}</td></tr>
+    <tr><td>4</td><td>Bending Moment at Blade Root (MyB)</td><td>{{ results.MyB }} Nm</td></tr>
+    <tr><td>5</td><td>Thrust Force on Shaft (Fx-sha)</td><td>{{ results.Fx_sha }} N</td></tr>
+</table>
+
+
+<h2>Load Case I: Parked Wind Loading (Maximum Exposure)</h2>
+<table>
+    <tr><th>Component</th><th>Description</th><th>Force</th></tr>
+    <tr><td>Nacelle</td><td>Wind Drag Force</td><td>{{ results.F_nacelle }} N</td></tr>
+    <tr><td>Tower</td><td>Wind Drag Force</td><td>{{ results.F_tower }} N</td></tr>
+    <tr><td>Blades</td><td>Total Wind Force on Blades</td><td>{{ results.F_blade }} N</td></tr>
+</table>
             {% endif %}
         </div>
 
