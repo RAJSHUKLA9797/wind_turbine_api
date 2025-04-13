@@ -7,88 +7,100 @@
     <title>Wind Turbine Force Calculation</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+            height: 100vh;
+            background: url('https://www.shutterstock.com/image-photo/offshore-windmill-farm-ocean-westermeerwind-600nw-759730900.jpg') no-repeat center center/cover;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
         }
+
         .container {
-            background-color: #ffffff;
-            padding: 20px 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 30px 50px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
             max-width: 500px;
             width: 100%;
         }
+
         h1 {
             text-align: center;
-            color: #333333;
+            color: #003366;
+            font-size: 28px;
+            margin-bottom: 20px;
         }
+
         form {
             display: flex;
             flex-direction: column;
         }
+
         label {
             margin-top: 15px;
             margin-bottom: 5px;
-            color: #555555;
+            color: #333333;
+            font-weight: 500;
         }
+
         input[type="number"],
         input[type="file"] {
             padding: 10px;
-            border: 1px solid #cccccc;
-            border-radius: 4px;
+            border: 1px solid #aaaaaa;
+            border-radius: 5px;
+            font-size: 14px;
         }
+
         button {
-            margin-top: 20px;
-            padding: 10px;
+            margin-top: 25px;
+            padding: 12px;
             background-color: #007BFF;
-            color: #ffffff;
+            color: white;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            border-radius: 6px;
             font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         .footer {
             margin-top: 20px;
             text-align: center;
-            color: #888888;
-            font-size: 12px;
+            color: #444444;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 25px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Wind Turbine Calculation</h1>
-        <!-- <form action="/calculate_fzb" method="post" enctype="multipart/form-data">
-            <label for="power">Power Required (MW):</label>
-            <input type="number" id="power" name="power" step="0.01" required>
-
-            <label for="file">Upload CSV File:</label>
-            <input type="file" id="file" name="file" accept=".csv" required>
-
-            <button type="submit">Calculate</button>
-        </form> -->
         <form action="/calculate_fzb" method="post" enctype="multipart/form-data">
             <label for="power">Power Required (MW):</label>
             <input type="number" id="power" name="power" step="0.01" required>
-        
+
             <label for="blades">Number of Blades (B):</label>
             <input type="number" id="blades" name="blades" step="1" value="3" required>
-        
+
             <label for="cp">Power Coefficient (Cp):</label>
             <input type="number" id="cp" name="cp" step="0.01" value="0.4" required>
-        
+
             <label for="file">Upload CSV File:</label>
             <input type="file" id="file" name="file" accept=".csv" required>
-        
+
             <button type="submit">Calculate</button>
         </form>
         <div class="footer">
